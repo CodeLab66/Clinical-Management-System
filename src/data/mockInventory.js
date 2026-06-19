@@ -1,0 +1,22 @@
+export const mockInventory = [
+  {
+    id: 1,
+    name: "Amoxicillin",
+    category: "medicine",
+    brand: "VetMox",
+    generic_name: "Amoxicillin",
+    unit: "tablet",
+    purchase_price: 25,
+    sale_price: 50,
+    supplier_id: 1,
+    supplier_name: "Lahore Vet Supplies",
+    branch_id: 1,
+    branch_name: "DHA Branch",
+    storage_condition: "room_temperature",
+    batch_number: "AMX-2026-01",
+    expiry_date: "2027-01-20",
+    quantity: 120,
+    minimum_stock_level: 30,
+    status: "completed",
+  },
+];

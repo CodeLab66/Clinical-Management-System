@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #f1f2ee;
+  --bg-soft: #e7e4dd;
+  --bg-sidebar: rgba(255, 255, 255, 0.72);
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --card-bg-soft: rgba(255, 255, 255, 0.52);
+  --card-border: rgba(255, 255, 255, 0.55);
+  --primary: #e9783a;
+  --primary-dark: #c95b23;
+  --primary-soft: #ffe0cc;
+  --text-main: #151515;
+  --text-secondary: #626262;
+  --text-muted: #8a8a8a;
+  --success: #4f8f68;
+  --warning: #e9a23b;
+  --danger: #d64545;
+  --info: #4c7faf;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-width: 320px;
+  max-width: 100%;
+  overflow-x: hidden;
+  background: var(--bg-main);
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(233, 120, 58, 0.12), transparent 28rem),
+    linear-gradient(135deg, var(--bg-main) 0%, var(--bg-soft) 100%);
+  color: var(--text-main);
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.glass-card-soft {
+  background: var(--card-bg-soft);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.page-shell {
+  width: 100%;
+  max-width: 100%;
+  padding-bottom: 2rem;
+}
+
+.soft-panel {
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 10px 30px rgba(21, 21, 21, 0.05);
+}
+
+.orange-focus {
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    background-color 150ms ease;
+}
+
+.orange-focus:focus,
+.orange-focus:focus-within,
+.orange-focus:focus-visible {
+  border-color: rgba(233, 120, 58, 0.55);
+  box-shadow: 0 0 0 4px rgba(233, 120, 58, 0.14);
+}
+
+.muted-text {
+  color: var(--text-muted);
+}
+
+.dashboard-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.sidebar-section-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.scrollbar-thin {
+  scrollbar-color: rgba(21, 21, 21, 0.18) transparent;
+  scrollbar-width: thin;
+}

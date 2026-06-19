@@ -1,0 +1,43 @@
+export const mockAppointmentRequests = [
+  {
+    id: 1,
+    owner_name: "Usman Ali",
+    phone: "03215556677",
+    whatsapp: "03215556677",
+    email: "usman@example.com",
+    pet_name: "Milo",
+    species: "cat",
+    breed: "Persian",
+    service_id: 2,
+    service_name: "Vaccination",
+    branch_id: 1,
+    branch_name: "DHA Branch",
+    preferred_date: "2026-06-20",
+    preferred_time: "16:30",
+    complaint: "Annual vaccination required",
+    is_emergency: false,
+    status: "new_request",
+    created_at: "2026-06-18T10:15:00Z",
+  },
+];
+
+export const mockAppointments = [
+  {
+    id: 1,
+    client_id: 1,
+    pet_id: 1,
+    pet_name: "Max",
+    owner_name: "Ayesha Khan",
+    doctor_id: 1,
+    doctor_name: "Dr. Ahmed Khan",
+    branch_id: 1,
+    branch_name: "DHA Branch",
+    service_id: 1,
+    service_name: "Consultation",
+    appointment_date: "2026-06-20",
+    start_time: "16:30",
+    end_time: "17:00",
+    status: "confirmed",
+    notes: "Vomiting for 2 days",
+  },
+];

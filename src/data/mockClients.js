@@ -1,0 +1,21 @@
+export const mockClients = [
+  {
+    id: 1,
+    name: "Ayesha Khan",
+    phone: "03001234567",
+    whatsapp: "03001234567",
+    email: "ayesha@example.com",
+    address: "Lahore",
+    city: "Lahore",
+    emergency_contact: "03210000000",
+    preferred_branch_id: 1,
+    preferred_doctor_id: 1,
+    tags: ["regular"],
+    total_pets: 2,
+    total_visits: 8,
+    total_spending: 78500,
+    outstanding_balance: 2500,
+    last_visit_date: "2026-06-18",
+    notes: "Prefers WhatsApp communication",
+  },
+];

@@ -1,0 +1,21 @@
+export const mockQueue = [
+  {
+    id: 1,
+    token_number: "Q-014",
+    appointment_id: 1,
+    client_id: 1,
+    pet_id: 1,
+    pet_name: "Max",
+    species: "dog",
+    owner_name: "Ayesha Khan",
+    doctor_id: 1,
+    doctor_name: "Dr. Ahmed Khan",
+    branch_id: 1,
+    service: "Consultation",
+    status: "waiting",
+    priority: "normal",
+    arrived_at: "2026-06-20T16:10:00Z",
+    waiting_minutes: 18,
+    notes: "Owner reports vomiting",
+  },
+];
