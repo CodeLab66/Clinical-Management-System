@@ -9,5 +9,5 @@ const priorityMeta = {
 
 export function PriorityBadge({ priority = "normal", className }) {
   const [label, style] = priorityMeta[priority] || priorityMeta.normal;
-  return <span className={cn("inline-flex max-w-full items-center whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-bold leading-none", style, className)}>{label}</span>;
+  return <span className={cn("inline-flex max-w-full items-center whitespace-nowrap rounded-full px-2 py-1 text-[10px] font-bold leading-none xl:px-2.5 xl:text-[11px]", style, className)}>{label}</span>;
 }

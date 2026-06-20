@@ -9,7 +9,7 @@ export function TableToolbar({ title, searchPlaceholder, actions, children, clas
         {children}
       </div>
       <div className="flex flex-wrap items-center gap-3">
-        <SearchInput className="min-w-[220px]" placeholder={searchPlaceholder} />
+        <SearchInput className="min-w-0 sm:min-w-[220px]" placeholder={searchPlaceholder} />
         {actions}
       </div>
     </div>

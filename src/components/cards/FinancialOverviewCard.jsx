@@ -164,7 +164,7 @@ export function FinancialOverviewCard({
         ))}
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-2">
+      <div className="grid gap-3 md:grid-cols-2 xl:gap-4">
         <div className="rounded-[22px] bg-white/40 p-4">
           <h4 className="font-heading text-base font-bold text-text-main">
             Revenue Breakdown

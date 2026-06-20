@@ -37,7 +37,7 @@ export function ChartCard({
           {actions || <IconButton icon={MoreHorizontal} label="Chart actions" className="h-9 w-9" />}
         </div>
       </div>
-      <div className="min-w-0 overflow-hidden">{children}</div>
+      <div className="chart-wrapper min-w-0 w-full max-w-full overflow-hidden">{children}</div>
     </GlassCard>
   );
 }

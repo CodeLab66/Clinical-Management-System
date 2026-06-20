@@ -62,7 +62,7 @@ export function DonutProgressChart({
   const gap = 4;
 
   return (
-    <div className={cn("flex min-w-0 flex-col items-center", className)}>
+    <div className={cn("chart-wrapper flex min-w-0 w-full max-w-full flex-col items-center overflow-hidden", className)}>
       {(title || label) && (
         <div className="mb-4 w-full text-center">
           {title ? <h3 className="font-heading text-lg font-bold text-text-main">{title}</h3> : null}
@@ -71,8 +71,8 @@ export function DonutProgressChart({
       <div
         className="relative max-w-full"
         style={{
-          height: compact ? `clamp(132px, 16vw, ${resolvedSize}px)` : resolvedSize,
-          width: compact ? `clamp(132px, 16vw, ${resolvedSize}px)` : resolvedSize,
+          height: compact ? `clamp(120px, 16vw, ${resolvedSize}px)` : resolvedSize,
+          width: compact ? `clamp(120px, 16vw, ${resolvedSize}px)` : resolvedSize,
         }}
       >
         <svg viewBox={`0 0 ${resolvedSize} ${resolvedSize}`} className="h-full w-full">

@@ -23,8 +23,8 @@ export function Sidebar({
       ) : null}
       <aside
         className={cn(
-          "glass-card fixed inset-y-4 left-4 z-50 flex max-w-[calc(100vw-2rem)] flex-col overflow-hidden p-4 transition-[transform,width,padding] duration-200 ease-in-out md:z-30 md:translate-x-0",
-          isCollapsed ? "w-20 px-3" : "w-[248px]",
+          "app-sidebar glass-card fixed inset-y-4 left-4 z-50 flex max-w-[calc(100vw-2rem)] flex-col overflow-hidden p-4 transition-[transform,width,padding,left] duration-200 ease-in-out md:z-30 md:translate-x-0",
+          isCollapsed ? "app-sidebar-collapsed" : "app-sidebar-expanded",
           isMobileOpen ? "translate-x-0" : "-translate-x-[120%] md:translate-x-0",
         )}
       >

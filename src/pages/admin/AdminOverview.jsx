@@ -75,20 +75,20 @@ function DashboardSkeleton() {
   return (
     <PageContainer className="overview-page">
       <LoadingSkeleton className="min-h-[116px]" />
-      <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_300px]">
-        <div className="flex min-w-0 flex-col gap-5">
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid items-start gap-4 md:grid-cols-[minmax(0,1fr)_190px] min-[1024px]:grid-cols-[minmax(0,1fr)_230px] xl:grid-cols-[minmax(0,1fr)_300px] xl:gap-5">
+        <div className="flex min-w-0 flex-col gap-3 min-[1024px]:gap-4 xl:gap-5">
+          <div className="grid gap-3 md:grid-cols-3 xl:gap-4">
             {Array.from({ length: 6 }).map((_, index) => (
               <LoadingSkeleton key={index} />
             ))}
           </div>
-          <div className="grid items-start gap-5 md:grid-cols-2">
+          <div className="grid items-start gap-3 md:grid-cols-2 min-[1024px]:gap-4 xl:gap-5">
             {Array.from({ length: 5 }).map((_, index) => (
               <LoadingSkeleton key={index} className="min-h-[190px]" />
             ))}
           </div>
         </div>
-        <div className="flex min-w-0 flex-col gap-5">
+        <div className="flex min-w-0 flex-col gap-3 min-[1024px]:gap-4 xl:gap-5">
           {Array.from({ length: 3 }).map((_, index) => (
             <LoadingSkeleton key={index} className="min-h-[180px]" />
           ))}
@@ -108,7 +108,7 @@ function WeeklyClinicActivity({ data }) {
     <RoundedBarChart
       data={data}
       activeIndex={4}
-      height={210}
+      height={270}
       showValueBubble
       variant="appointments"
       compact
@@ -134,7 +134,7 @@ function ServiceBreakdown({ data }) {
   }));
 
   return (
-    <div className="grid min-w-0 gap-3 md:grid-cols-[148px_minmax(0,1fr)] md:items-center xl:grid-cols-1 2xl:grid-cols-[148px_minmax(0,1fr)]">
+    <div className="grid min-w-0 gap-3 min-[1024px]:grid-cols-[148px_minmax(0,1fr)] min-[1024px]:items-center xl:grid-cols-1 2xl:grid-cols-[148px_minmax(0,1fr)]">
       <DonutProgressChart
         value={data[0]?.value || 0}
         label={data[0]?.title}
@@ -351,6 +351,217 @@ function RecentActivitiesCard({ recentActivities, className }) {
   );
 }
 
+function KpiGrid({ metrics, className = "grid gap-3 md:grid-cols-3 xl:gap-5" }) {
+  return (
+    <section className={className}>
+      {metrics.length ? (
+        metrics.map((metric) => {
+          const Icon = kpiIcons[metric.icon] || TrendingUp;
+          return (
+            <StatCard
+              key={metric.id}
+              label={metric.title}
+              value={metric.value}
+              subtitle={metric.subtitle}
+              trend={metric.trend}
+              trendType={metric.trend_type}
+              icon={Icon}
+              className={cn(
+                metric.status === "critical" && "border-danger/20 bg-danger/5",
+                metric.status === "warning" && "border-warning/25 bg-white/70",
+              )}
+            />
+          );
+        })
+      ) : (
+        <div className="md:col-span-full">
+          <SectionEmpty title="No KPI metrics" />
+        </div>
+      )}
+    </section>
+  );
+}
+
+function ServiceBreakdownCard({ data }) {
+  return (
+    <ChartCard
+      title="Service Breakdown"
+      subtitle="Share of today's completed and active services."
+      filterText="Today"
+      compact
+    >
+      <ServiceBreakdown data={data} />
+    </ChartCard>
+  );
+}
+
+function WeeklyClinicActivityCard({ data }) {
+  return (
+    <ChartCard
+      title="Weekly Clinic Activity"
+      subtitle="Appointments and visits across all branches."
+      filterText="This week"
+      compact
+    >
+      <WeeklyClinicActivity data={data} />
+    </ChartCard>
+  );
+}
+
+function BranchPerformanceCard({ data }) {
+  return (
+    <ChartCard
+      title="Branch Performance"
+      subtitle="Revenue contribution by clinic branch."
+      filterText="All branches"
+      compact
+    >
+      <BranchPerformance data={data} />
+    </ChartCard>
+  );
+}
+
+function WorkflowSummaryCard({ data }) {
+  return (
+    <ChartCard
+      title="Today's Workflow Summary"
+      subtitle="Appointment flow from request to completed visit."
+      filterText="Live"
+      compact
+    >
+      <WorkflowSummary data={data} />
+    </ChartCard>
+  );
+}
+
+function AppointmentSummaryCard({ appointments }) {
+  return (
+    <GlassCard>
+      <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h3 className="font-heading text-lg font-bold text-text-main">
+            Today's Appointment Summary
+          </h3>
+          <p className="mt-1 text-sm text-text-secondary">
+            Scheduled, checked-in, and completed appointments.
+          </p>
+        </div>
+        <StatusBadge status="confirmed" />
+      </div>
+      {appointments.length ? (
+        <DataTable columns={appointmentColumns} rows={appointments} />
+      ) : (
+        <SectionEmpty title="No appointments today" />
+      )}
+    </GlassCard>
+  );
+}
+
+function DetailStack({ dashboard, includeAppointments = false, className = "overview-detail-stack" }) {
+  return (
+    <section className={className}>
+      {includeAppointments ? <AppointmentSummaryCard appointments={dashboard.todayAppointments} /> : null}
+
+      <TopDoctorsFullWidthCard doctors={dashboard.topDoctors} className="w-full max-w-none" />
+
+      <FinancialOverviewCard
+        className="w-full max-w-none"
+        metrics={dashboard.financialOverview?.metrics}
+        revenueBreakdown={dashboard.financialOverview?.revenueBreakdown}
+        expenseBreakdown={dashboard.financialOverview?.expenseBreakdown}
+        records={dashboard.financialOverview?.records}
+      />
+
+      <PendingTasks tasks={dashboard.pendingTasks} />
+
+      <RecentActivitiesCard
+        recentActivities={dashboard.recentActivities}
+        className="w-full max-w-none"
+      />
+    </section>
+  );
+}
+
+function DesktopOverviewLayout({ dashboard }) {
+  return (
+    <>
+      <div className="overview-upper-layout">
+        <main className="overview-left-flow">
+          <KpiGrid metrics={dashboard.kpiMetrics} />
+
+          <section className="grid min-w-0 items-start gap-3 md:grid-cols-2 min-[1024px]:gap-4 xl:gap-5">
+            <div className="flex min-w-0 flex-col gap-3 min-[1024px]:gap-4 xl:gap-5">
+              <ServiceBreakdownCard data={dashboard.serviceBreakdown} />
+              <BranchPerformanceCard data={dashboard.branchPerformance} />
+              <InventorySnapshot snapshot={dashboard.inventorySnapshot} />
+            </div>
+
+            <div className="flex min-w-0 flex-col gap-3 min-[1024px]:gap-4 xl:gap-5">
+              <WeeklyClinicActivityCard data={dashboard.weeklyClinicActivity} />
+              <FollowUpRecallCard items={dashboard.followUpRecallQueue} />
+            </div>
+          </section>
+
+          <AppointmentSummaryCard appointments={dashboard.todayAppointments} />
+        </main>
+
+        <aside className="overview-right-rail">
+          <RemindersCard reminders={dashboard.reminders} />
+          <CriticalCasesCard criticalCases={dashboard.criticalCases} />
+          <WorkflowSummaryCard data={dashboard.workflowSummary} />
+        </aside>
+      </div>
+
+      <DetailStack dashboard={dashboard} />
+    </>
+  );
+}
+
+function TabletOverviewLayout({ dashboard }) {
+  return (
+    <div className="overview-tablet-layout">
+      <KpiGrid
+        metrics={dashboard.kpiMetrics}
+        className="grid gap-3 md:grid-cols-2 min-[900px]:grid-cols-3"
+      />
+
+      <section className="tablet-dashboard-grid">
+        <ServiceBreakdownCard data={dashboard.serviceBreakdown} />
+        <WeeklyClinicActivityCard data={dashboard.weeklyClinicActivity} />
+        <RemindersCard reminders={dashboard.reminders} />
+        <CriticalCasesCard criticalCases={dashboard.criticalCases} />
+        <BranchPerformanceCard data={dashboard.branchPerformance} />
+        <WorkflowSummaryCard data={dashboard.workflowSummary} />
+        <FollowUpRecallCard items={dashboard.followUpRecallQueue} />
+        <InventorySnapshot snapshot={dashboard.inventorySnapshot} />
+      </section>
+
+      <DetailStack dashboard={dashboard} includeAppointments />
+    </div>
+  );
+}
+
+function MobileOverviewLayout({ dashboard }) {
+  return (
+    <div className="overview-mobile-layout">
+      <KpiGrid metrics={dashboard.kpiMetrics} className="grid gap-3" />
+
+      <section className="flex min-w-0 flex-col gap-3">
+        <ServiceBreakdownCard data={dashboard.serviceBreakdown} />
+        <WeeklyClinicActivityCard data={dashboard.weeklyClinicActivity} />
+        <RemindersCard reminders={dashboard.reminders} />
+        <CriticalCasesCard criticalCases={dashboard.criticalCases} />
+        <BranchPerformanceCard data={dashboard.branchPerformance} />
+        <WorkflowSummaryCard data={dashboard.workflowSummary} />
+        <FollowUpRecallCard items={dashboard.followUpRecallQueue} />
+        <InventorySnapshot snapshot={dashboard.inventorySnapshot} />
+      </section>
+
+      <DetailStack dashboard={dashboard} includeAppointments />
+    </div>
+  );
+}
+
 export default function AdminOverview() {
   const [dashboard, setDashboard] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -437,7 +648,7 @@ export default function AdminOverview() {
   }
 
   return (
-    <PageContainer className="space-y-5">
+    <PageContainer className="overview-page space-y-5">
       <PageHeader
         title="Overview"
         subtitle="Complete clinic operations summary for today."
@@ -454,126 +665,17 @@ export default function AdminOverview() {
         }
       />
 
-      <div className="overview-upper-layout">
-        <main className="overview-left-flow">
-          <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 xl:gap-5">
-            {dashboard.kpiMetrics.length ? (
-              dashboard.kpiMetrics.map((metric) => {
-                const Icon = kpiIcons[metric.icon] || TrendingUp;
-                return (
-                  <StatCard
-                    key={metric.id}
-                    label={metric.title}
-                    value={metric.value}
-                    subtitle={metric.subtitle}
-                    trend={metric.trend}
-                    trendType={metric.trend_type}
-                    icon={Icon}
-                    className={cn(
-                      metric.status === "critical" &&
-                        "border-danger/20 bg-danger/5",
-                      metric.status === "warning" &&
-                        "border-warning/25 bg-white/70",
-                    )}
-                  />
-                );
-              })
-            ) : (
-              <div className="md:col-span-2 xl:col-span-3">
-                <SectionEmpty title="No KPI metrics" />
-              </div>
-            )}
-          </section>
-
-          <section className="grid min-w-0 items-start gap-4 md:grid-cols-2 xl:gap-5">
-            <div className="flex min-w-0 flex-col gap-4 xl:gap-5">
-              <ChartCard
-                title="Service Breakdown"
-                subtitle="Share of today's completed and active services."
-                filterText="Today"
-                compact
-              >
-                <ServiceBreakdown data={dashboard.serviceBreakdown} />
-              </ChartCard>
-
-              <ChartCard
-                title="Branch Performance"
-                subtitle="Revenue contribution by clinic branch."
-                filterText="All branches"
-                compact
-              >
-                <BranchPerformance data={dashboard.branchPerformance} />
-              </ChartCard>
-
-              <InventorySnapshot snapshot={dashboard.inventorySnapshot} />
-            </div>
-
-            <div className="flex min-w-0 flex-col gap-4 xl:gap-5">
-              <ChartCard
-                title="Weekly Clinic Activity"
-                subtitle="Appointments and visits across all branches."
-                filterText="This week"
-                compact
-              >
-                <WeeklyClinicActivity data={dashboard.weeklyClinicActivity} />
-              </ChartCard>
-
-              <FollowUpRecallCard items={dashboard.followUpRecallQueue} />
-            </div>
-          </section>
-
-          <GlassCard>
-            <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-              <div>
-                <h3 className="font-heading text-lg font-bold text-text-main">
-                  Today's Appointment Summary
-                </h3>
-                <p className="mt-1 text-sm text-text-secondary">
-                  Scheduled, checked-in, and completed appointments.
-                </p>
-              </div>
-              <StatusBadge status="confirmed" />
-            </div>
-            {dashboard.todayAppointments.length ? (
-              <DataTable columns={appointmentColumns} rows={dashboard.todayAppointments} />
-            ) : (
-              <SectionEmpty title="No appointments today" />
-            )}
-          </GlassCard>
-        </main>
-
-        <aside className="overview-right-rail">
-          <RemindersCard reminders={dashboard.reminders} />
-          <CriticalCasesCard criticalCases={dashboard.criticalCases} />
-          <ChartCard
-            title="Today's Workflow Summary"
-            subtitle="Appointment flow from request to completed visit."
-            filterText="Live"
-            compact
-          >
-            <WorkflowSummary data={dashboard.workflowSummary} />
-          </ChartCard>
-        </aside>
+      <div className="hidden xl:block">
+        <DesktopOverviewLayout dashboard={dashboard} />
       </div>
 
-      <section className="overview-detail-stack">
-        <TopDoctorsFullWidthCard doctors={dashboard.topDoctors} className="w-full max-w-none" />
+      <div className="hidden md:block xl:hidden">
+        <TabletOverviewLayout dashboard={dashboard} />
+      </div>
 
-        <FinancialOverviewCard
-          className="w-full max-w-none"
-          metrics={dashboard.financialOverview?.metrics}
-          revenueBreakdown={dashboard.financialOverview?.revenueBreakdown}
-          expenseBreakdown={dashboard.financialOverview?.expenseBreakdown}
-          records={dashboard.financialOverview?.records}
-        />
-
-        <PendingTasks tasks={dashboard.pendingTasks} />
-
-        <RecentActivitiesCard
-          recentActivities={dashboard.recentActivities}
-          className="w-full max-w-none"
-        />
-      </section>
+      <div className="md:hidden">
+        <MobileOverviewLayout dashboard={dashboard} />
+      </div>
     </PageContainer>
   );
 }

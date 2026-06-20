@@ -31,12 +31,12 @@ export function RoundedBarChart({
   compact = false,
   className,
 }) {
-  const chartHeight = compact ? `clamp(130px, 16vw, ${height}px)` : height;
+  const chartHeight = compact ? `clamp(120px, 16vw, ${height}px)` : height;
   const activeColor = variantColors[variant] || chartPalette.primary;
   const solidPalette = variantPalettes[variant] || variantPalettes.appointments;
 
   return (
-    <div className={cn("min-w-0", className)}>
+    <div className={cn("chart-wrapper min-w-0 w-full max-w-full overflow-hidden", className)}>
       {(title || subtitle) && (
         <div className="mb-5">
           {title ? <h3 className="font-heading text-lg font-bold text-text-main">{title}</h3> : null}
@@ -44,7 +44,7 @@ export function RoundedBarChart({
         </div>
       )}
       <div
-        className={cn("grid items-stretch", compact ? "gap-3" : "gap-5")}
+        className={cn("weekly-bars grid min-w-0 items-stretch", compact ? "gap-1.5 min-[900px]:gap-2 xl:gap-3" : "gap-5")}
         style={{
           height: chartHeight,
           gridTemplateColumns: `repeat(${Math.max(data.length, 1)}, minmax(0, 1fr))`,
@@ -65,7 +65,7 @@ export function RoundedBarChart({
                 : solidPalette[index % solidPalette.length]);
 
           return (
-            <div key={item.id || item[labelKey] || index} className={cn("flex h-full min-w-0 flex-col items-center", compact ? "gap-2" : "gap-3")}>
+            <div key={item.id || item[labelKey] || index} className={cn("weekly-bar-item flex h-full min-w-0 flex-col items-center overflow-hidden", compact ? "gap-1.5 xl:gap-2" : "gap-3")}>
               <div className={cn("relative flex min-h-0 w-full flex-1 items-end justify-center", compact ? "pt-7" : "pt-9")}>
                 {showValueBubble ? (
                   <span
@@ -99,7 +99,7 @@ export function RoundedBarChart({
                   />
                 </div>
               </div>
-              <span className={cn("max-w-full truncate font-bold text-text-muted", compact ? "text-[11px]" : "text-xs")}>{item[labelKey]}</span>
+              <span className={cn("weekly-bar-label max-w-full truncate whitespace-nowrap font-bold text-text-muted", compact ? "text-[10px] xl:text-[11px]" : "text-xs")}>{item[labelKey]}</span>
             </div>
           );
         })}

@@ -23,7 +23,7 @@ export function ActionButton({
       type={type}
       disabled={disabled || loading}
       className={cn(
-        "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60",
+        "inline-flex min-h-9 items-center justify-center gap-1.5 rounded-full px-3 text-xs font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60 xl:min-h-11 xl:gap-2 xl:px-5 xl:text-sm",
         variants[variant] || variants.primary,
         className,
       )}
