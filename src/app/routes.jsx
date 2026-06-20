@@ -5,6 +5,10 @@ import ForgotPassword from "@/pages/auth/ForgotPassword";
 import AdminOverview from "@/pages/admin/AdminOverview";
 import OverviewPlaceholder from "@/pages/admin/OverviewPlaceholder";
 import DesignSystemPreview from "@/pages/admin/DesignSystemPreview";
+import BranchesPage from "@/pages/admin/BranchesPage";
+import StaffPage from "@/pages/admin/StaffPage";
+import RolesPermissionsPage from "@/pages/admin/RolesPermissionsPage";
+import DoctorSchedulesPage from "@/pages/admin/DoctorSchedulesPage";
 import ReceptionPlaceholder from "@/pages/reception/ReceptionPlaceholder";
 import DoctorPlaceholder from "@/pages/doctor/DoctorPlaceholder";
 import LabPlaceholder from "@/pages/lab/LabPlaceholder";
@@ -175,12 +179,23 @@ const internalRoutes = [
   },
   {
     path: "branches",
-    ...page(SettingsPlaceholder, "Branches", "Management"),
+    element: <BranchesPage />,
+    handle: { title: "Branch Management" },
   },
-  { path: "staff", ...page(SettingsPlaceholder, "Staff", "Management") },
+  {
+    path: "staff",
+    element: <StaffPage />,
+    handle: { title: "Staff Management" },
+  },
+  {
+    path: "roles-permissions",
+    element: <RolesPermissionsPage />,
+    handle: { title: "Roles & Permissions" },
+  },
   {
     path: "doctor-schedules",
-    ...page(SettingsPlaceholder, "Doctor Schedules", "Management"),
+    element: <DoctorSchedulesPage />,
+    handle: { title: "Doctor Schedules" },
   },
   { path: "reports", ...page(OverviewPlaceholder, "Reports", "Management") },
   {
