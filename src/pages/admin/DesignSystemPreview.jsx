@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import { AlertCard } from "@/components/cards/AlertCard";
 import { ChartCard } from "@/components/cards/ChartCard";
+import { FinancialOverviewCard } from "@/components/cards/FinancialOverviewCard";
 import { FollowUpRecallCard } from "@/components/cards/FollowUpRecallCard";
 import { GlassCard } from "@/components/cards/GlassCard";
 import { MetricCard } from "@/components/cards/MetricCard";
@@ -66,6 +67,7 @@ import { DangerButton } from "@/components/ui/DangerButton";
 import { GhostButton } from "@/components/ui/GhostButton";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { chartPalette, themeColors } from "@/constants/theme";
+import { financialOverview } from "@/data/mockDashboard";
 
 const stats = [
   { label: "Appointments", value: "36", subtitle: "Today", trend: "+8%", trendType: "up", icon: CalendarPlus },
@@ -511,6 +513,14 @@ export default function DesignSystemPreview() {
           <FollowUpRecallCard items={followUpRecallPreview} />
 
           <TopDoctorsFullWidthCard doctors={topDoctorsPreview} className="md:col-span-3" />
+
+          <FinancialOverviewCard
+            className="md:col-span-3"
+            metrics={financialOverview.metrics}
+            revenueBreakdown={financialOverview.revenueBreakdown}
+            expenseBreakdown={financialOverview.expenseBreakdown}
+            records={financialOverview.records}
+          />
 
           <GlassCard>
             <h3 className="font-heading text-lg font-bold text-text-main">Separate Card</h3>

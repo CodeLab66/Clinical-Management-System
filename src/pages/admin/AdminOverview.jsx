@@ -15,6 +15,7 @@ import { WorkflowStepper } from "@/components/common/WorkflowStepper";
 import { PriorityBadge } from "@/components/badges/PriorityBadge";
 import { StatusBadge } from "@/components/badges/StatusBadge";
 import { ChartCard } from "@/components/cards/ChartCard";
+import { FinancialOverviewCard } from "@/components/cards/FinancialOverviewCard";
 import { FollowUpRecallCard } from "@/components/cards/FollowUpRecallCard";
 import { GlassCard } from "@/components/cards/GlassCard";
 import { StatCard } from "@/components/cards/StatCard";
@@ -72,20 +73,26 @@ function SectionEmpty({ title = "No data available", description }) {
 
 function DashboardSkeleton() {
   return (
-    <PageContainer className="space-y-5">
+    <PageContainer className="overview-page">
       <LoadingSkeleton className="min-h-[116px]" />
-      <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,2.2fr)_minmax(260px,0.9fr)]">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <LoadingSkeleton key={index} />
+      <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_300px]">
+        <div className="flex min-w-0 flex-col gap-5">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <LoadingSkeleton key={index} />
+            ))}
+          </div>
+          <div className="grid items-start gap-5 md:grid-cols-2">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <LoadingSkeleton key={index} className="min-h-[190px]" />
+            ))}
+          </div>
+        </div>
+        <div className="flex min-w-0 flex-col gap-5">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <LoadingSkeleton key={index} className="min-h-[180px]" />
           ))}
         </div>
-        <LoadingSkeleton />
-      </div>
-      <div className="grid items-start gap-5 xl:grid-cols-3">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <LoadingSkeleton key={index} className="min-h-[190px]" />
-        ))}
       </div>
       <LoadingSkeleton variant="table" />
     </PageContainer>
@@ -153,7 +160,7 @@ function BranchPerformance({ data }) {
       activeIndex={0}
       valueKey="chart_value"
       labelKey="short_title"
-      height={220}
+      height={170}
       showValueBubble
       variant="revenue"
       compact
@@ -368,6 +375,7 @@ export default function AdminOverview() {
         criticalCases,
         topDoctors,
         recentActivities,
+        financialOverview,
       ] = await Promise.all([
         dashboardService.getDashboardMetrics(),
         dashboardService.getWeeklyClinicActivity(),
@@ -382,6 +390,7 @@ export default function AdminOverview() {
         dashboardService.getCriticalCases(),
         dashboardService.getTopDoctors(),
         dashboardService.getRecentActivities(),
+        dashboardService.getFinancialOverview(),
       ]);
 
       setDashboard({
@@ -398,6 +407,7 @@ export default function AdminOverview() {
         criticalCases,
         topDoctors,
         recentActivities,
+        financialOverview,
       });
     } catch (caughtError) {
       setError(caughtError);
@@ -444,87 +454,96 @@ export default function AdminOverview() {
         }
       />
 
-      <section className="grid items-start gap-5 xl:grid-cols-[minmax(0,2.2fr)_minmax(260px,0.9fr)]">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {dashboard.kpiMetrics.length ? (
-            dashboard.kpiMetrics.map((metric) => {
-              const Icon = kpiIcons[metric.icon] || TrendingUp;
-              return (
-                <StatCard
-                  key={metric.id}
-                  label={metric.title}
-                  value={metric.value}
-                  subtitle={metric.subtitle}
-                  trend={metric.trend}
-                  trendType={metric.trend_type}
-                  icon={Icon}
-                  className={cn(
-                    metric.status === "critical" &&
-                      "border-danger/20 bg-danger/5",
-                    metric.status === "warning" &&
-                      "border-warning/25 bg-white/70",
-                  )}
-                />
-              );
-            })
-          ) : (
-            <div className="md:col-span-2 xl:col-span-3">
-              <SectionEmpty title="No KPI metrics" />
+      <div className="overview-upper-layout">
+        <main className="overview-left-flow">
+          <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {dashboard.kpiMetrics.length ? (
+              dashboard.kpiMetrics.map((metric) => {
+                const Icon = kpiIcons[metric.icon] || TrendingUp;
+                return (
+                  <StatCard
+                    key={metric.id}
+                    label={metric.title}
+                    value={metric.value}
+                    subtitle={metric.subtitle}
+                    trend={metric.trend}
+                    trendType={metric.trend_type}
+                    icon={Icon}
+                    className={cn(
+                      metric.status === "critical" &&
+                        "border-danger/20 bg-danger/5",
+                      metric.status === "warning" &&
+                        "border-warning/25 bg-white/70",
+                    )}
+                  />
+                );
+              })
+            ) : (
+              <div className="md:col-span-2 xl:col-span-3">
+                <SectionEmpty title="No KPI metrics" />
+              </div>
+            )}
+          </section>
+
+          <section className="grid min-w-0 items-start gap-5 md:grid-cols-2">
+            <div className="flex min-w-0 flex-col gap-5">
+              <ChartCard
+                title="Service Breakdown"
+                subtitle="Share of today's completed and active services."
+                filterText="Today"
+                compact
+              >
+                <ServiceBreakdown data={dashboard.serviceBreakdown} />
+              </ChartCard>
+
+              <ChartCard
+                title="Branch Performance"
+                subtitle="Revenue contribution by clinic branch."
+                filterText="All branches"
+                compact
+              >
+                <BranchPerformance data={dashboard.branchPerformance} />
+              </ChartCard>
+
+              <InventorySnapshot snapshot={dashboard.inventorySnapshot} />
             </div>
-          )}
-        </div>
-        <RemindersCard reminders={dashboard.reminders} />
-      </section>
 
-      <section className="grid min-w-0 items-start gap-5 lg:grid-cols-2 xl:grid-cols-3">
-        <div className="flex min-w-0 flex-col gap-5">
-          <ChartCard
-            title="Weekly Clinic Activity"
-            subtitle="Appointments and visits across all branches."
-            filterText="This week"
-            compact
-          >
-            <WeeklyClinicActivity data={dashboard.weeklyClinicActivity} />
-          </ChartCard>
+            <div className="flex min-w-0 flex-col gap-5">
+              <ChartCard
+                title="Weekly Clinic Activity"
+                subtitle="Appointments and visits across all branches."
+                filterText="This week"
+                compact
+              >
+                <WeeklyClinicActivity data={dashboard.weeklyClinicActivity} />
+              </ChartCard>
 
-          <ChartCard
-            title="Branch Performance"
-            subtitle="Revenue contribution by clinic branch."
-            filterText="All branches"
-            compact
-          >
-            <BranchPerformance data={dashboard.branchPerformance} />
-          </ChartCard>
+              <FollowUpRecallCard items={dashboard.followUpRecallQueue} />
+            </div>
+          </section>
 
-          <InventorySnapshot snapshot={dashboard.inventorySnapshot} />
-        </div>
+          <GlassCard>
+            <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h3 className="font-heading text-lg font-bold text-text-main">
+                  Today's Appointment Summary
+                </h3>
+                <p className="mt-1 text-sm text-text-secondary">
+                  Scheduled, checked-in, and completed appointments.
+                </p>
+              </div>
+              <StatusBadge status="confirmed" />
+            </div>
+            {dashboard.todayAppointments.length ? (
+              <DataTable columns={appointmentColumns} rows={dashboard.todayAppointments} />
+            ) : (
+              <SectionEmpty title="No appointments today" />
+            )}
+          </GlassCard>
+        </main>
 
-        <div className="flex min-w-0 flex-col gap-5">
-          <ChartCard
-            title="Service Breakdown"
-            subtitle="Share of today's completed and active services."
-            filterText="Today"
-            compact
-          >
-            <ServiceBreakdown data={dashboard.serviceBreakdown} />
-          </ChartCard>
-
-          <FollowUpRecallCard items={dashboard.followUpRecallQueue} />
-
-          <div className="flex min-w-0 flex-col gap-5 xl:hidden">
-            <CriticalCasesCard criticalCases={dashboard.criticalCases} />
-            <ChartCard
-              title="Today's Workflow Summary"
-              subtitle="Appointment flow from request to completed visit."
-              filterText="Live"
-              compact
-            >
-              <WorkflowSummary data={dashboard.workflowSummary} />
-            </ChartCard>
-          </div>
-        </div>
-
-        <div className="hidden min-w-0 flex-col gap-5 xl:flex">
+        <aside className="overview-right-rail">
+          <RemindersCard reminders={dashboard.reminders} />
           <CriticalCasesCard criticalCases={dashboard.criticalCases} />
           <ChartCard
             title="Today's Workflow Summary"
@@ -534,35 +553,27 @@ export default function AdminOverview() {
           >
             <WorkflowSummary data={dashboard.workflowSummary} />
           </ChartCard>
-        </div>
-      </section>
+        </aside>
+      </div>
 
-      <GlassCard>
-        <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-          <div>
-            <h3 className="font-heading text-lg font-bold text-text-main">
-              Today's Appointment Summary
-            </h3>
-            <p className="mt-1 text-sm text-text-secondary">
-              Scheduled, checked-in, and completed appointments.
-            </p>
-          </div>
-          <StatusBadge status="confirmed" />
-        </div>
-        {dashboard.todayAppointments.length ? (
-          <DataTable columns={appointmentColumns} rows={dashboard.todayAppointments} />
-        ) : (
-          <SectionEmpty title="No appointments today" />
-        )}
-      </GlassCard>
+      <section className="overview-detail-stack">
+        <TopDoctorsFullWidthCard doctors={dashboard.topDoctors} className="w-full max-w-none" />
 
-      <TopDoctorsFullWidthCard doctors={dashboard.topDoctors} />
+        <FinancialOverviewCard
+          className="w-full max-w-none"
+          metrics={dashboard.financialOverview?.metrics}
+          revenueBreakdown={dashboard.financialOverview?.revenueBreakdown}
+          expenseBreakdown={dashboard.financialOverview?.expenseBreakdown}
+          records={dashboard.financialOverview?.records}
+        />
 
-      <section className="grid items-start gap-5">
         <PendingTasks tasks={dashboard.pendingTasks} />
-      </section>
 
-      <RecentActivitiesCard recentActivities={dashboard.recentActivities} />
+        <RecentActivitiesCard
+          recentActivities={dashboard.recentActivities}
+          className="w-full max-w-none"
+        />
+      </section>
     </PageContainer>
   );
 }

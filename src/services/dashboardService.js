@@ -57,4 +57,8 @@ export const dashboardService = {
   getFollowUpRecallQueue() {
     return delay(mockDashboard.followUpRecallQueue);
   },
+
+  getFinancialOverview() {
+    return delay(mockDashboard.financialOverview);
+  },
 };

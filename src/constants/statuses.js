@@ -34,6 +34,7 @@ export const statusMetadata = {
   near_expiry: { label: "Near expiry", color: "warning" },
   expired: { label: "Expired", color: "danger" },
   paid: { label: "Paid", color: "success" },
+  recorded: { label: "Recorded", color: "info" },
   pending: { label: "Pending", color: "warning" },
   partial: { label: "Partial", color: "warning" },
   refunded: { label: "Refunded", color: "info" },
