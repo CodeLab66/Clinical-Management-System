@@ -10,7 +10,6 @@ import {
   ClipboardCheck,
   ClipboardList,
   CreditCard,
-  FileClock,
   FlaskConical,
   HelpCircle,
   Home,
@@ -25,6 +24,8 @@ import {
   ShieldCheck,
   Stethoscope,
   Users,
+  UsersRound,
+  CalendarClock,
 } from "lucide-react";
 import { routes } from "@/constants/routes";
 
@@ -64,9 +65,10 @@ export const sidebarSections = [
   {
     label: "MANAGEMENT",
     items: [
-      { label: "Branches", href: "/app/branches", icon: Building2 },
-      { label: "Staff", href: "/app/staff", icon: Users },
-      { label: "Doctor Schedules", href: "/app/doctor-schedules", icon: FileClock },
+      { label: "Branches", href: routes.branches, icon: Building2 },
+      { label: "Staff", href: routes.staff, icon: UsersRound },
+      { label: "Roles & Permissions", href: routes.rolesPermissions, icon: ShieldCheck },
+      { label: "Doctor Schedules", href: routes.doctorSchedules, icon: CalendarClock },
       { label: "Reports & Analytics", href: "/app/reports", icon: BarChart3 },
       { label: "Communication Logs", href: "/app/communications", icon: MessageSquareText },
       { label: "Audit Logs", href: "/app/audit-logs", icon: ClipboardCheck },
