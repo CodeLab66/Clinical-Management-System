@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { AppShell } from "@/components/layout/AppShell";
 import Login from "@/pages/auth/Login";
 import ForgotPassword from "@/pages/auth/ForgotPassword";
+import AdminOverview from "@/pages/admin/AdminOverview";
 import OverviewPlaceholder from "@/pages/admin/OverviewPlaceholder";
 import DesignSystemPreview from "@/pages/admin/DesignSystemPreview";
 import ReceptionPlaceholder from "@/pages/reception/ReceptionPlaceholder";
@@ -26,12 +27,8 @@ const internalRoutes = [
   },
   {
     path: "overview",
-    ...page(
-      OverviewPlaceholder,
-      "Overview",
-      "Admin Dashboard",
-      "Operational overview placeholder for clinic KPIs, charts, tables, and activity.",
-    ),
+    element: <AdminOverview />,
+    handle: { title: "Overview" },
   },
   {
     path: "design-system",

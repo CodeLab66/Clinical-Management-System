@@ -122,6 +122,38 @@ a {
   text-transform: uppercase;
 }
 
+.chart-stripe-pattern {
+  background-color: rgba(238, 239, 235, 0.95);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(84, 104, 92, 0.34) 0,
+    rgba(84, 104, 92, 0.34) 3px,
+    transparent 3px,
+    transparent 9px
+  );
+}
+
+.chart-bar-pill {
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.chart-legend-stripe {
+  background-color: rgba(138, 138, 138, 0.12);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(98, 98, 98, 0.2) 0,
+    rgba(98, 98, 98, 0.2) 1.5px,
+    transparent 1.5px,
+    transparent 5px
+  );
+}
+
+.progress-arc-rounded {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .scrollbar-thin {
   scrollbar-color: rgba(21, 21, 21, 0.18) transparent;
   scrollbar-width: thin;

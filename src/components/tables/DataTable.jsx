@@ -7,12 +7,12 @@ export function DataTable({ columns = [], rows = [], actions, getRowId = (row) =
   if (!rows.length) return <EmptyTableState />;
 
   return (
-    <div className={cn("overflow-hidden rounded-[24px] border border-white/60 bg-white/45", className)}>
+    <div className={cn("min-w-0 overflow-hidden rounded-[24px] border border-white/60 bg-white/45", className)}>
       <div className="overflow-x-auto">
-        <table className="min-w-full text-left text-sm">
-          <thead className="bg-white/55 text-xs uppercase tracking-[0.12em] text-text-muted">
+        <table className="min-w-[760px] text-left text-[0.925rem]">
+          <thead className="bg-white/55 text-[11px] uppercase tracking-[0.12em] text-text-muted">
             <tr>
-              {columns.map((column) => <th key={column.key} className="px-4 py-4 font-bold">{column.header}</th>)}
+              {columns.map((column) => <th key={column.key} className="whitespace-nowrap px-4 py-4 font-bold">{column.header}</th>)}
               {actions ? <th className="px-4 py-4 text-right font-bold">Actions</th> : null}
             </tr>
           </thead>
@@ -20,7 +20,7 @@ export function DataTable({ columns = [], rows = [], actions, getRowId = (row) =
             {rows.map((row) => (
               <tr key={getRowId(row)} className="transition hover:bg-white/50">
                 {columns.map((column) => (
-                  <td key={column.key} className="px-4 py-4 align-middle text-text-secondary">
+                  <td key={column.key} className="px-4 py-[18px] align-middle text-text-secondary">
                     {column.type === "status" ? <StatusBadge status={row[column.key]} /> : column.render ? column.render(row) : row[column.key]}
                   </td>
                 ))}

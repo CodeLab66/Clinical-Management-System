@@ -32,6 +32,8 @@ export const chartPalette = {
   primaryDark: themeColors.primaryDark,
   secondary: "#A8A29E",
   muted: "#D6D3CD",
+  stripeBase: "#E1DED6",
+  stripeLine: "#A9AAA4",
   success: themeColors.success,
   warning: themeColors.warning,
   danger: themeColors.danger,

@@ -10,26 +10,35 @@ export function StatCard({
   trend,
   trendType = "neutral",
   subtitle,
+  compact = false,
+  size = "compact",
   className,
 }) {
   const TrendIcon = trendType === "down" ? ArrowDownRight : ArrowUpRight;
   const tone = trendType === "up" ? "success" : trendType === "down" ? "danger" : "neutral";
+  const isCompact = compact || size === "compact";
 
   return (
-    <GlassCard className={cn("min-h-[150px]", className)}>
-      <div className="flex items-start justify-between gap-4">
+    <GlassCard
+      padding={isCompact ? "compact" : "default"}
+      className={cn(
+        isCompact ? "min-h-0" : "min-h-[140px]",
+        className,
+      )}
+    >
+      <div className={cn("flex min-w-0 items-start justify-between", isCompact ? "gap-3" : "gap-4")}>
         <div className="min-w-0">
-          <p className="text-sm font-semibold text-text-secondary">{label}</p>
-          <p className="mt-3 font-heading text-3xl font-bold text-text-main">{value}</p>
-          {subtitle ? <p className="mt-2 text-sm text-text-muted">{subtitle}</p> : null}
+          <p className={cn("break-words font-semibold text-text-secondary", isCompact ? "text-[13px] leading-4" : "text-sm")}>{label}</p>
+          <p className={cn("break-words font-heading font-bold text-text-main", isCompact ? "mt-1 text-[27px] leading-8" : "mt-3 text-3xl")}>{value}</p>
+          {subtitle ? <p className={cn("break-words text-text-muted", isCompact ? "mt-0.5 text-[11px] leading-4" : "mt-2 text-sm")}>{subtitle}</p> : null}
         </div>
-        <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary-dark">
-          <Icon className="h-5 w-5" aria-hidden="true" />
+        <span className={cn("inline-flex shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary-dark", isCompact ? "h-9 w-9" : "h-11 w-11")}>
+          <Icon className={cn(isCompact ? "h-4 w-4" : "h-5 w-5")} aria-hidden="true" />
         </span>
       </div>
       {trend ? (
-        <div className={cn("mt-5 inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold", toneClasses[tone])}>
-          <TrendIcon className="h-3.5 w-3.5" aria-hidden="true" />
+        <div className={cn("inline-flex max-w-full items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold leading-none", isCompact ? "mt-1.5" : "mt-5 text-xs", toneClasses[tone])}>
+          <TrendIcon className="h-3 w-3 shrink-0" aria-hidden="true" />
           {trend}
         </div>
       ) : null}

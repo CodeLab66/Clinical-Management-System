@@ -4,6 +4,8 @@ export const statusMetadata = {
     color: "primary",
     description: "New appointment request awaiting contact.",
   },
+  active: { label: "Active", color: "info" },
+  critical: { label: "Critical", color: "danger" },
   contacted: { label: "Contacted", color: "info" },
   confirmed: { label: "Confirmed", color: "info" },
   rescheduled: { label: "Rescheduled", color: "warning" },
