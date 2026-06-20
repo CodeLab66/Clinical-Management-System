@@ -55,10 +55,10 @@ export function FollowUpRecallCard({ items = [], className }) {
   return (
     <GlassCard padding="compact" className={cn("space-y-3", className)}>
       <div>
-        <h3 className="font-heading text-lg font-bold text-text-main">
+        <h3 className="font-heading text-base font-bold text-text-main xl:text-lg">
           Follow-up & Recall Queue
         </h3>
-        <p className="mt-1 text-sm leading-5 text-text-secondary">
+        <p className="mt-1 text-xs leading-5 text-text-secondary xl:text-sm">
           Upcoming recalls and missed follow-ups that need action.
         </p>
       </div>
@@ -71,11 +71,11 @@ export function FollowUpRecallCard({ items = [], className }) {
           return (
             <div
               key={item.id}
-              className="flex min-w-0 items-center gap-3 rounded-[18px] bg-white/45 p-3"
+              className="flex min-w-0 items-center gap-2.5 rounded-[18px] bg-white/45 p-2.5 xl:gap-3 xl:p-3"
             >
               <span
                 className={cn(
-                  "flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl",
+                  "flex h-8 w-8 shrink-0 items-center justify-center rounded-2xl xl:h-9 xl:w-9",
                   meta.icon,
                 )}
               >
@@ -83,7 +83,7 @@ export function FollowUpRecallCard({ items = [], className }) {
               </span>
               <div className="min-w-0 flex-1">
                 <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
-                  <p className="break-words text-sm font-bold leading-5 text-text-main">
+                  <p className="break-words text-[13px] font-bold leading-5 text-text-main xl:text-sm">
                     {item.label}
                   </p>
                   <span className="text-xs font-bold text-text-muted">{item.count}</span>

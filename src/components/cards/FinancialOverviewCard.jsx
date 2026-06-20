@@ -41,17 +41,17 @@ export function FinancialMetricTile({ metric }) {
   const TrendIcon = trendIcon(metric.status);
 
   return (
-    <div className={cn("min-w-0 rounded-[20px] border border-white/55 p-4", style.tile)}>
+    <div className={cn("min-w-0 rounded-[18px] border border-white/55 p-3.5 xl:rounded-[20px] xl:p-4", style.tile)}>
       <div className="flex min-w-0 items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="break-words text-xs font-bold uppercase tracking-[0.12em] text-text-muted">
+          <p className="break-words text-[11px] font-bold uppercase tracking-[0.12em] text-text-muted xl:text-xs">
             {metric.label}
           </p>
-          <p className="mt-2 break-words font-heading text-2xl font-bold leading-none text-text-main">
+          <p className="mt-2 break-words font-heading text-xl font-bold leading-none text-text-main xl:text-2xl">
             {metric.value}
           </p>
         </div>
-        <span className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl", style.icon)}>
+        <span className={cn("flex h-8 w-8 shrink-0 items-center justify-center rounded-2xl xl:h-9 xl:w-9", style.icon)}>
           <TrendIcon className="h-4 w-4" aria-hidden="true" />
         </span>
       </div>
@@ -69,10 +69,10 @@ export function BreakdownRow({ item, tone = "revenue" }) {
   return (
     <div className="min-w-0">
       <div className="flex min-w-0 items-center justify-between gap-3">
-        <p className="min-w-0 break-words text-sm font-bold text-text-main">
+        <p className="min-w-0 break-words text-[13px] font-bold text-text-main xl:text-sm">
           {item.category}
         </p>
-        <p className="shrink-0 text-sm font-bold text-text-secondary">{item.label}</p>
+        <p className="shrink-0 text-[13px] font-bold text-text-secondary xl:text-sm">{item.label}</p>
       </div>
       <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-white/65">
         <div
@@ -88,11 +88,11 @@ function FinancialRecords({ records = [] }) {
   return (
     <div className="min-w-0 overflow-hidden rounded-[22px] border border-white/60 bg-white/45">
       <div className="overflow-x-auto">
-        <table className="min-w-[860px] text-left text-sm">
+        <table className="min-w-[860px] text-left text-[0.84rem] xl:text-sm">
           <thead className="bg-white/55 text-[11px] uppercase tracking-[0.12em] text-text-muted">
             <tr>
               {["Time", "Type", "Category", "Description", "Branch", "Amount", "Status"].map((header) => (
-                <th key={header} className="whitespace-nowrap px-4 py-3 font-bold">
+                <th key={header} className="whitespace-nowrap px-3 py-3 font-bold xl:px-4">
                   {header}
                 </th>
               ))}
@@ -101,10 +101,10 @@ function FinancialRecords({ records = [] }) {
           <tbody className="divide-y divide-white/60">
             {records.map((record) => (
               <tr key={record.id} className="transition hover:bg-white/45">
-                <td className="whitespace-nowrap px-4 py-4 font-semibold text-text-secondary">
+                <td className="whitespace-nowrap px-3 py-3.5 font-semibold text-text-secondary xl:px-4 xl:py-4">
                   {record.time}
                 </td>
-                <td className="px-4 py-4">
+                <td className="px-3 py-3.5 xl:px-4 xl:py-4">
                   <span
                     className={cn(
                       "inline-flex rounded-full px-2.5 py-1 text-[11px] font-bold capitalize leading-none",
@@ -116,11 +116,11 @@ function FinancialRecords({ records = [] }) {
                     {record.type}
                   </span>
                 </td>
-                <td className="px-4 py-4 font-semibold text-text-main">{record.category}</td>
-                <td className="px-4 py-4 text-text-secondary">{record.description}</td>
-                <td className="px-4 py-4 text-text-secondary">{record.branch}</td>
-                <td className="whitespace-nowrap px-4 py-4 font-bold text-text-main">{record.amount}</td>
-                <td className="px-4 py-4">
+                <td className="px-3 py-3.5 font-semibold text-text-main xl:px-4 xl:py-4">{record.category}</td>
+                <td className="px-3 py-3.5 text-text-secondary xl:px-4 xl:py-4">{record.description}</td>
+                <td className="px-3 py-3.5 text-text-secondary xl:px-4 xl:py-4">{record.branch}</td>
+                <td className="whitespace-nowrap px-3 py-3.5 font-bold text-text-main xl:px-4 xl:py-4">{record.amount}</td>
+                <td className="px-3 py-3.5 xl:px-4 xl:py-4">
                   <StatusBadge status={record.status} />
                 </td>
               </tr>
@@ -140,13 +140,13 @@ export function FinancialOverviewCard({
   className,
 }) {
   return (
-    <GlassCard className={cn("space-y-5", className)}>
+    <GlassCard className={cn("space-y-4 xl:space-y-5", className)}>
       <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
         <div>
-          <h3 className="font-heading text-lg font-bold text-text-main">
+          <h3 className="font-heading text-base font-bold text-text-main xl:text-lg">
             Financial Overview
           </h3>
-          <p className="mt-1 text-sm leading-5 text-text-secondary">
+          <p className="mt-1 text-xs leading-5 text-text-secondary xl:text-sm">
             Revenue, expenses, and net performance across today's clinic operations.
           </p>
         </div>

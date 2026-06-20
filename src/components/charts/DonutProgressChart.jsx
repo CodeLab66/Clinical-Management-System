@@ -68,7 +68,13 @@ export function DonutProgressChart({
           {title ? <h3 className="font-heading text-lg font-bold text-text-main">{title}</h3> : null}
         </div>
       )}
-      <div className="relative max-w-full" style={{ height: resolvedSize, width: resolvedSize }}>
+      <div
+        className="relative max-w-full"
+        style={{
+          height: compact ? `clamp(132px, 16vw, ${resolvedSize}px)` : resolvedSize,
+          width: compact ? `clamp(132px, 16vw, ${resolvedSize}px)` : resolvedSize,
+        }}
+      >
         <svg viewBox={`0 0 ${resolvedSize} ${resolvedSize}`} className="h-full w-full">
           <defs>
             <pattern id={patternId} width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(135)">
@@ -106,7 +112,7 @@ export function DonutProgressChart({
           })}
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <span className={cn("font-heading font-bold text-text-main", compact ? "text-3xl" : "text-4xl")}>{safeValue}%</span>
+          <span className={cn("font-heading font-bold text-text-main", compact ? "text-2xl xl:text-3xl" : "text-3xl xl:text-4xl")}>{safeValue}%</span>
           {label ? <span className={cn("mt-1 font-semibold text-text-muted", compact ? "text-xs" : "text-sm")}>{label}</span> : null}
         </div>
       </div>

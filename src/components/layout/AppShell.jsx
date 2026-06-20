@@ -9,7 +9,9 @@ export function AppShell() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
     if (typeof window === "undefined") return false;
-    return window.localStorage.getItem(SIDEBAR_STORAGE_KEY) === "true";
+    const storedValue = window.localStorage.getItem(SIDEBAR_STORAGE_KEY);
+    if (storedValue != null) return storedValue === "true";
+    return window.matchMedia("(min-width: 768px) and (max-width: 1279px)").matches;
   });
 
   useEffect(() => {
@@ -29,9 +31,9 @@ export function AppShell() {
         onClose={() => setMobileMenuOpen(false)}
         onToggleCollapse={() => setSidebarCollapsed((current) => !current)}
       />
-      <div className="min-h-screen min-w-0 w-full overflow-x-hidden transition-[margin,width] duration-200 ease-in-out lg:ml-[var(--sidebar-offset)] lg:w-[calc(100vw_-_var(--sidebar-offset))]">
+      <div className="min-h-screen min-w-0 w-full overflow-x-hidden transition-[margin,width] duration-200 ease-in-out md:ml-[var(--sidebar-offset)] md:w-[calc(100vw_-_var(--sidebar-offset))]">
         <Topbar onMenuClick={() => setMobileMenuOpen(true)} />
-        <main className="w-full max-w-full overflow-x-hidden px-4 pb-8 md:px-6 xl:px-8">
+        <main className="w-full max-w-full overflow-x-hidden px-4 pb-8 md:px-5 xl:px-8">
           <div className="min-w-0">
             <Outlet />
           </div>

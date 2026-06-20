@@ -456,7 +456,7 @@ export default function AdminOverview() {
 
       <div className="overview-upper-layout">
         <main className="overview-left-flow">
-          <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 xl:gap-5">
             {dashboard.kpiMetrics.length ? (
               dashboard.kpiMetrics.map((metric) => {
                 const Icon = kpiIcons[metric.icon] || TrendingUp;
@@ -485,8 +485,8 @@ export default function AdminOverview() {
             )}
           </section>
 
-          <section className="grid min-w-0 items-start gap-5 md:grid-cols-2">
-            <div className="flex min-w-0 flex-col gap-5">
+          <section className="grid min-w-0 items-start gap-4 md:grid-cols-2 xl:gap-5">
+            <div className="flex min-w-0 flex-col gap-4 xl:gap-5">
               <ChartCard
                 title="Service Breakdown"
                 subtitle="Share of today's completed and active services."
@@ -508,7 +508,7 @@ export default function AdminOverview() {
               <InventorySnapshot snapshot={dashboard.inventorySnapshot} />
             </div>
 
-            <div className="flex min-w-0 flex-col gap-5">
+            <div className="flex min-w-0 flex-col gap-4 xl:gap-5">
               <ChartCard
                 title="Weekly Clinic Activity"
                 subtitle="Appointments and visits across all branches."

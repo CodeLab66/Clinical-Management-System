@@ -29,10 +29,10 @@ export function StatCard({
       <div className={cn("flex min-w-0 items-start justify-between", isCompact ? "gap-3" : "gap-4")}>
         <div className="min-w-0">
           <p className={cn("break-words font-semibold text-text-secondary", isCompact ? "text-[13px] leading-4" : "text-sm")}>{label}</p>
-          <p className={cn("break-words font-heading font-bold text-text-main", isCompact ? "mt-1 text-[27px] leading-8" : "mt-3 text-3xl")}>{value}</p>
+          <p className={cn("break-words font-heading font-bold text-text-main", isCompact ? "mt-1 text-[23px] leading-7 xl:text-[27px] xl:leading-8" : "mt-3 text-2xl xl:text-3xl")}>{value}</p>
           {subtitle ? <p className={cn("break-words text-text-muted", isCompact ? "mt-0.5 text-[11px] leading-4" : "mt-2 text-sm")}>{subtitle}</p> : null}
         </div>
-        <span className={cn("inline-flex shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary-dark", isCompact ? "h-9 w-9" : "h-11 w-11")}>
+        <span className={cn("inline-flex shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary-dark", isCompact ? "h-8 w-8 xl:h-9 xl:w-9" : "h-10 w-10 xl:h-11 xl:w-11")}>
           <Icon className={cn(isCompact ? "h-4 w-4" : "h-5 w-5")} aria-hidden="true" />
         </span>
       </div>

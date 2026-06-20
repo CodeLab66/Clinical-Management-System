@@ -15,7 +15,7 @@ export function Sidebar({
     <>
       {isMobileOpen ? (
         <button
-          className="fixed inset-0 z-40 bg-text-main/25 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-text-main/25 backdrop-blur-sm md:hidden"
           type="button"
           aria-label="Close menu"
           onClick={onClose}
@@ -23,9 +23,9 @@ export function Sidebar({
       ) : null}
       <aside
         className={cn(
-          "glass-card fixed inset-y-4 left-4 z-50 flex max-w-[calc(100vw-2rem)] flex-col overflow-hidden p-4 transition-[transform,width,padding] duration-200 ease-in-out lg:z-30 lg:translate-x-0",
+          "glass-card fixed inset-y-4 left-4 z-50 flex max-w-[calc(100vw-2rem)] flex-col overflow-hidden p-4 transition-[transform,width,padding] duration-200 ease-in-out md:z-30 md:translate-x-0",
           isCollapsed ? "w-20 px-3" : "w-[248px]",
-          isMobileOpen ? "translate-x-0" : "-translate-x-[120%] lg:translate-x-0",
+          isMobileOpen ? "translate-x-0" : "-translate-x-[120%] md:translate-x-0",
         )}
       >
         <div
@@ -48,7 +48,7 @@ export function Sidebar({
           {onToggleCollapse ? (
             <button
               className={cn(
-                "hidden h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/60 text-text-secondary transition hover:bg-primary-soft hover:text-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:inline-flex",
+                "hidden h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/60 text-text-secondary transition hover:bg-primary-soft hover:text-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:inline-flex",
               )}
               type="button"
               aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
@@ -63,7 +63,7 @@ export function Sidebar({
           ) : null}
           <button
             className={cn(
-              "inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/60 text-text-secondary lg:hidden",
+              "inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/60 text-text-secondary md:hidden",
               isCollapsed && "hidden",
             )}
             type="button"

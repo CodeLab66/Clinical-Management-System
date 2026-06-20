@@ -83,9 +83,9 @@ export function WorkflowStepper({
   return (
     <div
       className={cn(
-        "min-w-0 rounded-[22px] bg-white/42",
-        compact ? "p-3" : "p-4",
-        isHorizontal ? "grid gap-3 md:grid-cols-7" : "space-y-2.5",
+        "min-w-0 rounded-[20px] bg-white/42 xl:rounded-[22px]",
+        compact ? "p-2.5 xl:p-3" : "p-3 xl:p-4",
+        isHorizontal ? "grid gap-2 xl:gap-3 md:grid-cols-7" : "space-y-2 xl:space-y-2.5",
         className,
       )}
     >
@@ -114,15 +114,15 @@ export function WorkflowStepper({
             <div
               className={cn(
                 "relative z-10 flex min-w-0 gap-3 rounded-[18px] bg-white/45",
-                compact ? "p-2.5" : "p-3",
+                compact ? "p-2 xl:p-2.5" : "p-2.5 xl:p-3",
                 isHorizontal ? "md:flex-col" : "items-center",
               )}
             >
-              <span className={cn("flex shrink-0 items-center justify-center rounded-2xl", compact ? "h-9 w-9" : "h-10 w-10", tone.icon)}>
+              <span className={cn("flex shrink-0 items-center justify-center rounded-2xl", compact ? "h-8 w-8 xl:h-9 xl:w-9" : "h-9 w-9 xl:h-10 xl:w-10", tone.icon)}>
                 <Icon className={cn(compact ? "h-4 w-4" : "h-5 w-5")} aria-hidden="true" />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="break-words text-sm font-bold leading-5 text-text-main">
+                <p className="break-words text-[13px] font-bold leading-5 text-text-main xl:text-sm">
                   {step.short_title || step.label || step.title}
                 </p>
                 <p className={cn("mt-0.5 text-xs font-bold", tone.label)}>

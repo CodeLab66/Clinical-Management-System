@@ -47,17 +47,17 @@ export function ReminderCard({
         embedded
           ? "rounded-[20px] border border-white/60 bg-white/45"
           : "rounded-[28px] border-white/65 bg-white/70",
-        compact ? "p-4" : undefined,
+        compact ? "p-3.5 xl:p-4" : undefined,
         className,
       )}
     >
-      <div className={cn("flex items-center justify-between gap-4", compact ? "mb-3" : "mb-8")}>
+      <div className={cn("flex items-center justify-between gap-3 xl:gap-4", compact ? "mb-2.5 xl:mb-3" : "mb-6 xl:mb-8")}>
         <p className={cn("font-bold text-text-secondary", compact ? "text-xs uppercase tracking-[0.12em]" : "text-sm")}>{title}</p>
         <span className={cn("inline-flex items-center justify-center rounded-2xl", compact ? "h-9 w-9" : "h-11 w-11", styles.icon)}>
           <Icon className={cn(compact ? "h-4 w-4" : "h-5 w-5")} aria-hidden="true" />
         </span>
       </div>
-      <h3 className={cn("break-words font-heading font-bold leading-tight text-text-main", compact ? "text-base" : "text-2xl")}>{heading}</h3>
+      <h3 className={cn("break-words font-heading font-bold leading-tight text-text-main", compact ? "text-[15px] xl:text-base" : "text-xl xl:text-2xl")}>{heading}</h3>
       {time ? <p className={cn("font-semibold text-text-muted", compact ? "mt-2 text-xs" : "mt-3 text-sm")}>{time}</p> : null}
       {buttonLabel ? (
         <ActionButton

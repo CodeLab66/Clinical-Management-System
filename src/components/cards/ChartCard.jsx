@@ -17,13 +17,13 @@ export function ChartCard({
     <GlassCard
       padding={compact ? "compact" : "default"}
       className={cn(
-        "rounded-[24px] border-white/65 bg-white/70",
+        "rounded-[20px] border-white/65 bg-white/70 md:rounded-[22px] xl:rounded-[24px]",
         className,
       )}
     >
-      <div className={cn("flex min-w-0 items-start justify-between gap-4", compact ? "mb-3" : "mb-5")}>
+      <div className={cn("flex min-w-0 items-start justify-between gap-3 xl:gap-4", compact ? "mb-2.5 xl:mb-3" : "mb-4 xl:mb-5")}>
         <div className="min-w-0">
-          <h3 className={cn("font-heading font-bold text-text-main", compact ? "text-base" : "text-lg")}>
+          <h3 className={cn("font-heading font-bold text-text-main", compact ? "text-[15px] xl:text-base" : "text-base xl:text-lg")}>
             {title}
           </h3>
           {subtitle ? <p className={cn("mt-1 break-words text-text-secondary", compact ? "text-xs leading-5" : "text-sm")}>{subtitle}</p> : null}

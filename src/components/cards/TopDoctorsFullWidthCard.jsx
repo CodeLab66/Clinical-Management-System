@@ -28,24 +28,24 @@ function initials(name = "") {
 
 function DoctorMetricPill({ label, value }) {
   return (
-    <div className="min-w-0 rounded-[16px] bg-white/50 px-3 py-2">
+    <div className="min-w-0 rounded-[16px] bg-white/50 px-2.5 py-2 xl:px-3">
       <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-text-muted">
         {label}
       </p>
-      <p className="mt-1 break-words text-sm font-bold text-text-main">{value}</p>
+      <p className="mt-1 break-words text-[13px] font-bold text-text-main xl:text-sm">{value}</p>
     </div>
   );
 }
 
 export function TopDoctorsFullWidthCard({ doctors = [], className }) {
   return (
-    <GlassCard className={cn("space-y-4", className)}>
+    <GlassCard className={cn("space-y-3.5 xl:space-y-4", className)}>
       <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
         <div>
-          <h3 className="font-heading text-lg font-bold text-text-main">
+          <h3 className="font-heading text-base font-bold text-text-main xl:text-lg">
             Top Doctors Today
           </h3>
-          <p className="mt-1 text-sm leading-5 text-text-secondary">
+          <p className="mt-1 text-xs leading-5 text-text-secondary xl:text-sm">
             Consultation load, revenue, and clinical activity by doctor.
           </p>
         </div>
@@ -54,14 +54,14 @@ export function TopDoctorsFullWidthCard({ doctors = [], className }) {
         </span>
       </div>
 
-      <div className="grid gap-3 xl:grid-cols-3">
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {doctors.map((doctor) => {
           const status = statusStyles[doctor.status] || statusStyles.pending;
 
           return (
             <div
               key={doctor.id}
-              className="min-w-0 rounded-[22px] border border-white/60 bg-white/45 p-4"
+              className="min-w-0 rounded-[20px] border border-white/60 bg-white/45 p-3.5 xl:rounded-[22px] xl:p-4"
             >
               <div className="flex min-w-0 items-start gap-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-sm font-extrabold text-primary-dark">
@@ -77,7 +77,7 @@ export function TopDoctorsFullWidthCard({ doctors = [], className }) {
                       {status.label}
                     </span>
                   </div>
-                  <p className="mt-1 text-sm font-semibold text-text-secondary">
+                  <p className="mt-1 text-xs font-semibold text-text-secondary xl:text-sm">
                     {doctor.branch} - {doctor.role}
                   </p>
                 </div>

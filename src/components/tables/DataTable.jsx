@@ -9,22 +9,22 @@ export function DataTable({ columns = [], rows = [], actions, getRowId = (row) =
   return (
     <div className={cn("min-w-0 overflow-hidden rounded-[24px] border border-white/60 bg-white/45", className)}>
       <div className="overflow-x-auto">
-        <table className="min-w-[760px] text-left text-[0.925rem]">
+        <table className="min-w-[760px] text-left text-[0.84rem] xl:text-[0.925rem]">
           <thead className="bg-white/55 text-[11px] uppercase tracking-[0.12em] text-text-muted">
             <tr>
-              {columns.map((column) => <th key={column.key} className="whitespace-nowrap px-4 py-4 font-bold">{column.header}</th>)}
-              {actions ? <th className="px-4 py-4 text-right font-bold">Actions</th> : null}
+              {columns.map((column) => <th key={column.key} className="whitespace-nowrap px-3 py-3 font-bold xl:px-4 xl:py-4">{column.header}</th>)}
+              {actions ? <th className="px-3 py-3 text-right font-bold xl:px-4 xl:py-4">Actions</th> : null}
             </tr>
           </thead>
           <tbody className="divide-y divide-white/60">
             {rows.map((row) => (
               <tr key={getRowId(row)} className="transition hover:bg-white/50">
                 {columns.map((column) => (
-                  <td key={column.key} className="px-4 py-[18px] align-middle text-text-secondary">
+                  <td key={column.key} className="px-3 py-3.5 align-middle text-text-secondary xl:px-4 xl:py-[18px]">
                     {column.type === "status" ? <StatusBadge status={row[column.key]} /> : column.render ? column.render(row) : row[column.key]}
                   </td>
                 ))}
-                {actions ? <td className="px-4 py-4 text-right"><ActionMenu items={actions(row)} /></td> : null}
+                {actions ? <td className="px-3 py-3.5 text-right xl:px-4 xl:py-4"><ActionMenu items={actions(row)} /></td> : null}
               </tr>
             ))}
           </tbody>

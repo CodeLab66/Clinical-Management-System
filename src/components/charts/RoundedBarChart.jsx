@@ -31,6 +31,7 @@ export function RoundedBarChart({
   compact = false,
   className,
 }) {
+  const chartHeight = compact ? `clamp(130px, 16vw, ${height}px)` : height;
   const activeColor = variantColors[variant] || chartPalette.primary;
   const solidPalette = variantPalettes[variant] || variantPalettes.appointments;
 
@@ -45,7 +46,7 @@ export function RoundedBarChart({
       <div
         className={cn("grid items-stretch", compact ? "gap-3" : "gap-5")}
         style={{
-          height,
+          height: chartHeight,
           gridTemplateColumns: `repeat(${Math.max(data.length, 1)}, minmax(0, 1fr))`,
         }}
       >
