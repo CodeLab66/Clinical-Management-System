@@ -602,6 +602,13 @@ export const followUpRecallQueue = [
     status: "overdue",
     icon: "calendar_x",
   },
+  {
+    id: 6,
+    label: "Dental Recheck",
+    count: "2 pets",
+    status: "due_soon",
+    icon: "stethoscope",
+  },
 ];
 
 export const financialOverview = {

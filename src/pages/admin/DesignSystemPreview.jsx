@@ -103,6 +103,7 @@ const followUpRecallPreview = [
   { id: 3, label: "Post-Surgery Check", count: "3 pets", status: "important", icon: "stethoscope" },
   { id: 4, label: "Lab Recheck", count: "4 pets", status: "doctor_review", icon: "lab" },
   { id: 5, label: "Missed Follow-ups", count: "6 clients", status: "overdue", icon: "calendar_x" },
+  { id: 6, label: "Dental Recheck", count: "2 pets", status: "due_soon", icon: "stethoscope" },
 ];
 
 const topDoctorsPreview = [
