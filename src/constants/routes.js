@@ -9,7 +9,7 @@ export const routes = {
   rolesPermissions: "/app/roles-permissions",
   doctorSchedules: "/app/doctor-schedules",
   appointments: "/app/appointments",
-  appointmentRequests: "/app/appointment-requests",
+  appointmentRequests: "/app/requests",
   queue: "/app/queue",
   emergencyCheckin: "/app/emergency-checkin",
   clients: "/app/clients",

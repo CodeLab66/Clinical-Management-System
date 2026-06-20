@@ -9,6 +9,11 @@ import BranchesPage from "@/pages/admin/BranchesPage";
 import StaffPage from "@/pages/admin/StaffPage";
 import RolesPermissionsPage from "@/pages/admin/RolesPermissionsPage";
 import DoctorSchedulesPage from "@/pages/admin/DoctorSchedulesPage";
+import AppointmentRequestsPage from "@/pages/clinic/AppointmentRequestsPage";
+import AppointmentsPage from "@/pages/clinic/AppointmentsPage";
+import QueuePage from "@/pages/clinic/QueuePage";
+import ClientsPage from "@/pages/clinic/ClientsPage";
+import PetsPage from "@/pages/clinic/PetsPage";
 import ReceptionPlaceholder from "@/pages/reception/ReceptionPlaceholder";
 import DoctorPlaceholder from "@/pages/doctor/DoctorPlaceholder";
 import LabPlaceholder from "@/pages/lab/LabPlaceholder";
@@ -41,18 +46,25 @@ const internalRoutes = [
   },
   {
     path: "appointments",
-    ...page(ReceptionPlaceholder, "Appointments", "Reception"),
+    element: <AppointmentsPage />,
+    handle: { title: "Appointments" },
+  },
+  {
+    path: "requests",
+    element: <AppointmentRequestsPage />,
+    handle: { title: "Appointment Requests" },
   },
   {
     path: "appointment-requests",
-    ...page(ReceptionPlaceholder, "Appointment Requests", "Reception"),
+    element: <Navigate to="/app/requests" replace />,
+    handle: { title: "Appointment Requests" },
   },
-  { path: "queue", ...page(ReceptionPlaceholder, "Queue", "Reception") },
+  { path: "queue", element: <QueuePage />, handle: { title: "Queue" } },
   {
     path: "emergency-checkin",
     ...page(ReceptionPlaceholder, "Emergency Check-in", "Reception"),
   },
-  { path: "clients", ...page(ReceptionPlaceholder, "Clients", "Reception") },
+  { path: "clients", element: <ClientsPage />, handle: { title: "Clients" } },
   {
     path: "clients/new",
     ...page(ReceptionPlaceholder, "New Client", "Reception"),
@@ -61,7 +73,7 @@ const internalRoutes = [
     path: "clients/:clientId",
     ...page(ReceptionPlaceholder, "Client Detail", "Reception"),
   },
-  { path: "pets", ...page(ReceptionPlaceholder, "Pets", "Reception") },
+  { path: "pets", element: <PetsPage />, handle: { title: "Pets" } },
   { path: "pets/new", ...page(ReceptionPlaceholder, "New Pet", "Reception") },
   {
     path: "pets/:petId",

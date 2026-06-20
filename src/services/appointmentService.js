@@ -1,32 +1,44 @@
-import apiClient from "@/services/apiClient";
-import { createResourceService, delay, useMocks } from "@/services/mockService";
-import {
-  mockAppointmentRequests,
-  mockAppointments,
-} from "@/data/mockAppointments";
-
-const appointmentResource = createResourceService({
-  endpoint: "/appointments/",
-  mockData: mockAppointments,
-});
+import { mockAppointments } from "@/data/mockAppointments";
+import { delay } from "@/services/mockService";
 
 export const appointmentService = {
-  ...appointmentResource,
-
-  async listRequests(params) {
-    if (useMocks) return delay(mockAppointmentRequests);
-    const response = await apiClient.get("/appointment-requests/", { params });
-    return response.data;
+  async getAppointments() {
+    return delay(mockAppointments);
   },
 
-  async getRequestById(id) {
-    if (useMocks) {
-      return delay(
-        mockAppointmentRequests.find((record) => String(record.id) === String(id)) ||
-          null,
-      );
-    }
-    const response = await apiClient.get(`/appointment-requests/${id}/`);
-    return response.data;
+  async getAppointmentById(id) {
+    return delay(mockAppointments.find((appointment) => appointment.id === id) || null);
+  },
+
+  async createAppointment(payload) {
+    return delay({
+      id: `apt-${Date.now()}`,
+      status: "confirmed",
+      paymentStatus: "unpaid",
+      ...payload,
+    });
+  },
+
+  async updateAppointment(id, payload) {
+    return delay({ id, ...payload });
+  },
+
+  async rescheduleAppointment(id, payload) {
+    return delay({
+      id,
+      date: payload.date,
+      time: payload.time,
+      rescheduleReason: payload.reason,
+      status: "confirmed",
+      notifyClient: payload.notifyClient,
+    });
+  },
+
+  async cancelAppointment(id) {
+    return delay({ id, status: "cancelled" });
+  },
+
+  async checkInAppointment(id) {
+    return delay({ id, status: "checked_in" });
   },
 };

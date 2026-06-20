@@ -1,7 +1,7 @@
 import {
   Ambulance,
   BarChart3,
-  BellRing,
+  Inbox,
   Bone,
   Boxes,
   BriefcaseMedical,
@@ -35,7 +35,7 @@ export const sidebarSections = [
     items: [
       { label: "Overview", href: routes.overview, icon: Home },
       { label: "Appointments", href: routes.appointments, icon: CalendarDays },
-      { label: "Requests", href: routes.appointmentRequests, icon: BellRing },
+      { label: "Requests", href: routes.appointmentRequests, icon: Inbox },
       { label: "Queue", href: routes.queue, icon: ClipboardList },
       { label: "Clients", href: routes.clients, icon: Users },
       { label: "Pets", href: routes.pets, icon: PawPrint },
