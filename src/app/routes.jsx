@@ -14,6 +14,12 @@ import AppointmentsPage from "@/pages/clinic/AppointmentsPage";
 import QueuePage from "@/pages/clinic/QueuePage";
 import ClientsPage from "@/pages/clinic/ClientsPage";
 import PetsPage from "@/pages/clinic/PetsPage";
+import ConsultationsPage from "@/pages/clinical/ConsultationsPage";
+import ConsultationWorkspacePage from "@/pages/clinical/ConsultationWorkspacePage";
+import MedicalRecordsPage from "@/pages/clinical/MedicalRecordsPage";
+import PrescriptionsPage from "@/pages/clinical/PrescriptionsPage";
+import VaccinationDewormingPage from "@/pages/clinical/VaccinationDewormingPage";
+import FollowUpsPage from "@/pages/clinical/FollowUpsPage";
 import ReceptionPlaceholder from "@/pages/reception/ReceptionPlaceholder";
 import DoctorPlaceholder from "@/pages/doctor/DoctorPlaceholder";
 import LabPlaceholder from "@/pages/lab/LabPlaceholder";
@@ -85,27 +91,42 @@ const internalRoutes = [
   },
   {
     path: "consultations",
-    ...page(DoctorPlaceholder, "Consultations", "Doctor Workspace"),
+    element: <ConsultationsPage />,
+    handle: { title: "Consultations" },
   },
   {
-    path: "consultations/:visitId",
-    ...page(DoctorPlaceholder, "Consultation Detail", "Doctor Workspace"),
+    path: "consultations/:id",
+    element: <ConsultationWorkspacePage />,
+    handle: { title: "Consultation Workspace" },
+  },
+  {
+    path: "consultation-workspace",
+    element: <ConsultationWorkspacePage />,
+    handle: { title: "Consultation Workspace" },
+  },
+  {
+    path: "emr",
+    element: <MedicalRecordsPage />,
+    handle: { title: "Medical Records" },
   },
   {
     path: "prescriptions",
-    ...page(DoctorPlaceholder, "Prescriptions", "Doctor Workspace"),
+    element: <PrescriptionsPage />,
+    handle: { title: "Prescriptions" },
   },
   {
     path: "prescriptions/:prescriptionId",
     ...page(DoctorPlaceholder, "Prescription Detail", "Doctor Workspace"),
   },
   {
-    path: "vaccinations/:petId",
-    ...page(DoctorPlaceholder, "Vaccination Record", "Doctor Workspace"),
+    path: "vaccination-deworming",
+    element: <VaccinationDewormingPage />,
+    handle: { title: "Vaccination & Deworming" },
   },
   {
-    path: "deworming/:petId",
-    ...page(DoctorPlaceholder, "Deworming Record", "Doctor Workspace"),
+    path: "follow-ups",
+    element: <FollowUpsPage />,
+    handle: { title: "Follow-ups" },
   },
   {
     path: "lab/dashboard",

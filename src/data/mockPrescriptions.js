@@ -1,27 +1,23 @@
+export const prescriptionKpis = [
+  { label: "Created Today", value: "9", subtitle: "Doctor generated", icon: "FilePlus2", trend: "+3 since noon", trendType: "up" },
+  { label: "Sent To Pharmacy", value: "6", subtitle: "Ready for dispense", icon: "Send", trend: "2 urgent", trendType: "neutral" },
+  { label: "Dispensed", value: "5", subtitle: "Completed today", icon: "CheckCircle2", trend: "On track", trendType: "up" },
+  { label: "Pending Dispensing", value: "4", subtitle: "Pharmacy queue", icon: "Clock3", trend: "Needs follow-up", trendType: "down" },
+  { label: "Cancelled", value: "1", subtitle: "Voided", icon: "CircleX", trend: "Low", trendType: "neutral" },
+  { label: "Refill Needed", value: "3", subtitle: "Client requests", icon: "RefreshCcw", trend: "Review doses", trendType: "neutral" },
+];
+
 export const mockPrescriptions = [
-  {
-    id: 1,
-    visit_id: 1,
-    pet_id: 1,
-    client_id: 1,
-    doctor_id: 1,
-    status: "pharmacy_pending",
-    created_at: "2026-06-20T17:05:00Z",
-    items: [
-      {
-        id: 1,
-        medicine_id: 5,
-        medicine_name: "Amoxicillin",
-        strength: "250mg",
-        dose: "1 tablet",
-        frequency: "BID",
-        duration: "5 days",
-        route: "oral",
-        quantity: 10,
-        instructions: "Give after food",
-        refill_allowed: false,
-      },
-    ],
-    owner_instructions: "Keep pet hydrated and return if vomiting continues.",
-  },
+  { id: "RX-2601", petId: "pet-001", petName: "Max", ownerName: "Ayesha Khan", doctor: "Dr. Sara Ahmed", branch: "DHA Branch", diagnosis: "Allergic dermatitis", status: "sent_to_pharmacy", pharmacyStatus: "dispensing_pending", createdAt: "2026-06-22 10:45 AM", refillAllowed: true, warnings: "Avoid poultry treats.", doctorNotes: "Recheck itch score in 10 days.", medicines: [{ name: "Apoquel", dosage: "16 mg", frequency: "Once daily", duration: "10 days", route: "Oral", quantity: "10 tablets", instructions: "Give after food" }, { name: "Chlorhexidine Shampoo", dosage: "2%", frequency: "Twice weekly", duration: "3 weeks", route: "Topical", quantity: "1 bottle", instructions: "Leave contact for 8 minutes" }] },
+  { id: "RX-2602", petId: "pet-006", petName: "Luna", ownerName: "Maham Sheikh", doctor: "Dr. Bilal Farooq", branch: "Johar Town Branch", diagnosis: "Dehydration and CKD review", status: "draft", pharmacyStatus: "not_sent", createdAt: "2026-06-22 10:55 AM", refillAllowed: false, warnings: "Pending renal values.", doctorNotes: "Hold nephrotoxic drugs.", medicines: [{ name: "Renal Support Paste", dosage: "1 ml", frequency: "Twice daily", duration: "7 days", route: "Oral", quantity: "1 tube", instructions: "Start after lab review" }] },
+  { id: "RX-2603", petId: "pet-018", petName: "Chotu", ownerName: "Mehwish Iqbal", doctor: "Dr. Hamza Noor", branch: "Johar Town Branch", diagnosis: "Trauma pain control", status: "dispensing_pending", pharmacyStatus: "dispensing_pending", createdAt: "2026-06-22 10:58 AM", refillAllowed: false, warnings: "Do not combine with other NSAIDs.", doctorNotes: "Dispense after imaging clearance.", medicines: [{ name: "Meloxicam", dosage: "0.1 mg/kg", frequency: "Once daily", duration: "3 days", route: "Oral", quantity: "3 doses", instructions: "Give with food" }, { name: "Gabapentin", dosage: "50 mg", frequency: "Twice daily", duration: "5 days", route: "Oral", quantity: "10 capsules", instructions: "May cause sleepiness" }] },
+  { id: "RX-2604", petId: "pet-005", petName: "Coco", ownerName: "Sana Malik", doctor: "Dr. Nida Sheikh", branch: "Gulberg Branch", diagnosis: "Post-vaccine support", status: "dispensed", pharmacyStatus: "dispensed", createdAt: "2026-06-22 09:55 AM", refillAllowed: false, warnings: "Call clinic for facial swelling.", doctorNotes: "No routine medicine needed.", medicines: [{ name: "Probiotic Sachet", dosage: "1 sachet", frequency: "Once daily", duration: "3 days", route: "Oral", quantity: "3 sachets", instructions: "Optional if appetite dips" }] },
+  { id: "RX-2605", petId: "pet-017", petName: "Snow", ownerName: "Saad Mir", doctor: "Dr. Bilal Farooq", branch: "DHA Branch", diagnosis: "Diabetes mellitus monitoring", status: "sent_to_pharmacy", pharmacyStatus: "dispensing_pending", createdAt: "2026-06-22 10:10 AM", refillAllowed: true, warnings: "Do not skip meals after insulin.", doctorNotes: "Owner trained on dose.", medicines: [{ name: "Insulin Glargine", dosage: "1.5 IU", frequency: "Every 12 hours", duration: "30 days", route: "SC", quantity: "1 vial", instructions: "Refrigerate" }, { name: "U-40 Syringes", dosage: "0.3 ml", frequency: "As directed", duration: "30 days", route: "SC", quantity: "60 syringes", instructions: "Use once only" }] },
+  { id: "RX-2606", petId: "pet-009", petName: "Nala", ownerName: "Zainab Tariq", doctor: "Dr. Nida Sheikh", branch: "DHA Branch", diagnosis: "Cystitis follow-up", status: "dispensed", pharmacyStatus: "dispensed", createdAt: "2026-06-22 09:30 AM", refillAllowed: false, warnings: "Sulfa allergy.", doctorNotes: "Continue urinary diet.", medicines: [{ name: "Cranberry Support", dosage: "1 tablet", frequency: "Once daily", duration: "14 days", route: "Oral", quantity: "14 tablets", instructions: "Give after meal" }] },
+  { id: "RX-2607", petId: "pet-003", petName: "Sheru", ownerName: "Hassan Raza", doctor: "Dr. Hamza Noor", branch: "Model Town Branch", diagnosis: "Post-op orthopedic care", status: "dispensed", pharmacyStatus: "dispensed", createdAt: "2026-06-22 08:55 AM", refillAllowed: false, warnings: "Rest strictly.", doctorNotes: "Finish antibiotic course.", medicines: [{ name: "Cephalexin", dosage: "500 mg", frequency: "Twice daily", duration: "5 days", route: "Oral", quantity: "10 tablets", instructions: "Complete course" }, { name: "Joint Supplement", dosage: "1 chew", frequency: "Once daily", duration: "30 days", route: "Oral", quantity: "30 chews", instructions: "Long-term support" }] },
+  { id: "RX-2608", petId: "pet-002", petName: "Milo", ownerName: "Ayesha Khan", doctor: "Dr. Sara Ahmed", branch: "DHA Branch", diagnosis: "Conjunctivitis suspected", status: "draft", pharmacyStatus: "not_sent", createdAt: "2026-06-22 11:05 AM", refillAllowed: false, warnings: "Exam pending.", doctorNotes: "Do fluorescein stain first.", medicines: [{ name: "Lubricant Eye Drops", dosage: "1 drop", frequency: "4 times daily", duration: "5 days", route: "Ophthalmic", quantity: "1 bottle", instructions: "Use until reviewed" }] },
+  { id: "RX-2609", petId: "pet-020", petName: "Mithu", ownerName: "Maryam Asif", doctor: "Dr. Nida Sheikh", branch: "Gulberg Branch", diagnosis: "Wing soft tissue injury", status: "dispensed", pharmacyStatus: "dispensed", createdAt: "2026-06-22 08:45 AM", refillAllowed: false, warnings: "Exotic dosing only.", doctorNotes: "Stop in 2 days.", medicines: [{ name: "Avian Pain Relief", dosage: "As charted", frequency: "Once daily", duration: "2 days", route: "Oral", quantity: "2 doses", instructions: "Clinic-measured doses" }] },
+  { id: "RX-2610", petId: "pet-010", petName: "Rocky", ownerName: "Ali Hamza", doctor: "Dr. Sara Ahmed", branch: "Johar Town Branch", diagnosis: "Behavior consult", status: "cancelled", pharmacyStatus: "cancelled", createdAt: "2026-06-22 09:10 AM", refillAllowed: false, warnings: "Cancelled before exam.", doctorNotes: "Reassess after consultation.", medicines: [{ name: "Trazodone", dosage: "100 mg", frequency: "Before visit", duration: "1 dose", route: "Oral", quantity: "1 tablet", instructions: "Cancelled" }] },
+  { id: "RX-2611", petId: "pet-012", petName: "Misty", ownerName: "Fatima Noor", doctor: "Dr. Bilal Farooq", branch: "Cantt Branch", diagnosis: "Ophthalmology follow-up", status: "sent_to_pharmacy", pharmacyStatus: "dispensing_pending", createdAt: "2026-06-21 04:20 PM", refillAllowed: true, warnings: "Do not touch dropper tip.", doctorNotes: "Recheck eye pressure.", medicines: [{ name: "Tobramycin Drops", dosage: "1 drop", frequency: "Three times daily", duration: "7 days", route: "Ophthalmic", quantity: "1 bottle", instructions: "Left eye" }] },
+  { id: "RX-2612", petId: "pet-016", petName: "Dobby", ownerName: "Saad Mir", doctor: "Dr. Sara Ahmed", branch: "DHA Branch", diagnosis: "Skin sensitivity", status: "dispensed", pharmacyStatus: "dispensed", createdAt: "2026-06-21 12:30 PM", refillAllowed: true, warnings: "Dust sensitivity.", doctorNotes: "Maintain skin routine.", medicines: [{ name: "Moisturizing Spray", dosage: "Light coat", frequency: "Once daily", duration: "14 days", route: "Topical", quantity: "1 bottle", instructions: "Avoid eyes" }, { name: "Omega Oil", dosage: "1 ml", frequency: "Once daily", duration: "30 days", route: "Oral", quantity: "30 ml", instructions: "Mix with food" }] },
 ];
